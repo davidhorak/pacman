@@ -5,7 +5,7 @@ Implementation of the 1980's Pac-Man, just for sake of exploration and education
 
 ## Demo
 
-[Link]
+[Live Preview](https://pacman-davidhorak.vercel.app/)
 
 ## Contributing
 
