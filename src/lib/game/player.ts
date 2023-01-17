@@ -8,12 +8,6 @@ import { directionVelocity } from './directionVelocity'
 import type { Map } from './map'
 import { noop, round2, toLevelProperties, toLevelProperty } from './utils'
 
-// todo:
-// - ✅ Pac-man moves at 80% of his maximum speed until level 5 when he moves at full speed
-//   ✅ until level 21 at which point he reduces his speed to 90% for the remainder of the game.
-// - ✅ Each dot Pac-Man eats causes him to stop moving for one frame or 1/60th of a second.
-// - ✅ Each energizer Pac-Man eats causes him to stop moving for three frames or 3/60th of a second.
-
 type State = 'idle' | 'chomp' | 'eaten'
 
 type LevelProperties = {

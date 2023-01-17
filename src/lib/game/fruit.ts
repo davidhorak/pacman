@@ -2,8 +2,6 @@ import type { Engine } from '../engine/engine'
 import type { Collider } from '../engine/physics/collision'
 import type { Tiles } from '../engine/render/tiles'
 
-// POWER PELLETS
-
 export const fruits = {
   cherry: {
     points: 100,

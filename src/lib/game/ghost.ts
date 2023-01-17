@@ -22,7 +22,7 @@ const ghosts = {
       isInMode2: (level: number, remainingPellets: number) =>
         remainingPellets <= Math.min(244 - 60, 10 + level * 8),
       mode1SpeedMultiplier: 1.025,
-      mode2SpeedMultiplier: 1.05 // tbd here
+      mode2SpeedMultiplier: 1.05
     }
   },
   pinky: { scatterTarget: { x: 2, y: -3 }, gatedTarget: { x: 13.5, y: 14 } },
@@ -37,28 +37,6 @@ const ghosts = {
     eatenPelletsTrigger: 60
   }
 }
-
-// todo:
-// - ✅ block the special up tiles
-// - start:
-//   - ✅ red goes immediately
-//   - ✅ pinky goes immediately from the house
-//   - ✅ blinky (blue) leaves the house after 30 pills
-//   - ✅ clyde leaves the house after 1/3 of pills is consumed
-// red:
-//   - ✅ if x pills eaten goes to "Cruise Elroy"
-//     ✅ max level: after 60 eaten ... 20 remaining at the beginning. (244 - 20 = 224 = 164)
-//   - ✅ if x pills remaining, gain 5% speed boost
-//   - ✅ will momentarily cease being Cruise Elroy whenever the player loses a life.
-// - ✅ cycles
-// - ✅ flashing power pills
-// - ✅ The ghosts only change direction when the mode changes from chase-to-scatter, chase-to-frightened, scatter-to-chase, and scatter-to-frightened.
-// - ✅ Ghosts move at a slightly slower speed than Pac-Man until the 21st level at which point they begin moving faster than Pac-man.
-// - ✅ A ghost will always leave within 4 seconds during levels 1-4 and 5 seconds starting with level 5, no matter how many dots Pac-Man has eaten
-// - ✅ Ghosts normally leave the house depending how many dots Pac-Man has eaten. However, beginning at level three, all ghosts leave the ghost house immediately after being revived.
-// - ✅ Ghosts move left when leaving the ghost house unless the game has changed modes (from chase-to-scatter, chase-to-frightened, scatter-to-chase, or scatter-to-frightened) while the ghost is inside the ghost house. If the game changes modes while a ghost is in the house, the ghost will move to the right when leaving the house.
-// - Gated ghosts to be frightened (sprites)
-// - ✅ The ghosts’ “blue time” decreases with each level. By level 19, the ghosts stop turning blue altogether and can no longer be eaten by Pac-Man.
 
 type LevelProperties = {
   cycles: [State, number][]
@@ -397,8 +375,6 @@ export const ghost =
             cx = player.position.x + player.velocity.x * 2
             cy = player.position.y + player.velocity.y * 2
           }
-          // x(rot) = cos(rad) * (x - cx) - sin(rad) * (y - cy) + cx
-          // y(rot) = sin(rad) * (x - cx) + cos(rad) * (y - cy) + cy
           target.x =
             Math.cos(Math.PI) * (blinkyPosition.x - cx) -
             Math.sin(Math.PI) * (blinkyPosition.y - cy) +
@@ -616,13 +592,11 @@ export const ghost =
           ghosts.blinky.cruiseElroy.isInMode1(level, map.remainingPellets)
         ) {
           enterCruiseElroyMode()
-          // probe.broadcast('Cruise Erloy 1')
         } else if (
           cruiseElroyMode === 1 &&
           ghosts.blinky.cruiseElroy.isInMode2(level, map.remainingPellets)
         ) {
           cruiseElroyMode = 2
-          // probe.broadcast('Cruise Erloy 2')
         }
       })
 

@@ -124,7 +124,6 @@ export const map =
             : undefined
         )
         .filter((pellet): pellet is [number, Pellet] => !!pellet)
-      // .slice(0, 10)
     )
     const fruit = createFruit({ render, tiles, tileSize })(13 * mapTileSize, 16.5 * mapTileSize)
     const onGhostSpawned = observable<string>()

@@ -11,7 +11,7 @@ import { player as createPlayer } from './game/player'
 import mainSprite from './game/sprite-main'
 import { renderWithOffset } from './game/utils'
 
-export default () => {
+export default (development = false) => {
   const tileSize = 32
   const mapTileSize = 16
   const width = 28
@@ -348,49 +348,51 @@ export default () => {
       onKey('ArrowDown', keyTriggers)(() => (player.direction = 'down'), true)
     }
 
-    // onKey('p')(togglePause)
-    // onKey('g')(toggleGhostMode)
-    // onKey('r')(reset)
-    // onKey('[')(() =>
-    //   probeEvent(() => {
-    //     level--
-    //     reset()
-    //   })('level down')
-    // )
-    // onKey(']')(() => probeEvent(nextLevel)('level up'))
-    // onKey('d')(() => {
-    //   ghosts.forEach((ghost) => ghost.toggleDebug())
-    //   player.toggleDebug()
-    // })
-    // onKey('b')(() => ghosts.forEach((ghost) => ghost.printDebug()))
+    if (development) {
+      onKey('p')(togglePause)
+      onKey('g')(toggleGhostMode)
+      onKey('r')(reset)
+      onKey('[')(() =>
+        probeEvent(() => {
+          level--
+          reset()
+        })('level down')
+      )
+      onKey(']')(() => probeEvent(nextLevel)('level up'))
+      onKey('d')(() => {
+        ghosts.forEach((ghost) => ghost.toggleDebug())
+        player.toggleDebug()
+      })
+      onKey('b')(() => ghosts.forEach((ghost) => ghost.printDebug()))
 
-    // onKey('f')(() => {
-    //   bonusScore.multiplier = 1
-    //   ghosts.forEach(
-    //     (ghost) =>
-    //       ['scatter', 'chase'].includes(ghost.state) &&
-    //       (ghost.state = 'frightened')
-    //   )
-    // })
-    // onKey('e')(() => ghosts.forEach((ghost) => (ghost.state = 'eaten')))
-    // onKey('c')(() => ghosts.forEach((ghost) => (ghost.state = 'chase')))
-    // onKey('i')(() => ghosts.forEach((ghost) => (ghost.state = 'idle')))
-    // onKey('m')(() => map.toggleGuide())
-    // onKey('t')(() => {
-    //   ghosts.forEach((ghost) => ghost.toggleTarget())
-    //   player.toggleTarget()
-    // })
-    // onKey('a')(() => ghosts.forEach((ghost) => ghost.toggleAim()))
-    // onKey('x')(() => {
-    //   player.toggleCollider()
-    //   map.toggleCollider()
-    //   ghosts.forEach((ghost) => ghost.toggleCollider())
-    // })
-    // onKey('k')(console.clear)
-    // onKey('/')(() => {
-    //   state = 'eaten'
-    //   player.state = 'eaten'
-    // })
+      onKey('f')(() => {
+        bonusScore.multiplier = 1
+        ghosts.forEach(
+          (ghost) =>
+            ['scatter', 'chase'].includes(ghost.state) &&
+            (ghost.state = 'frightened')
+        )
+      })
+      onKey('e')(() => ghosts.forEach((ghost) => (ghost.state = 'eaten')))
+      onKey('c')(() => ghosts.forEach((ghost) => (ghost.state = 'chase')))
+      onKey('i')(() => ghosts.forEach((ghost) => (ghost.state = 'idle')))
+      onKey('m')(() => map.toggleGuide())
+      onKey('t')(() => {
+        ghosts.forEach((ghost) => ghost.toggleTarget())
+        player.toggleTarget()
+      })
+      onKey('a')(() => ghosts.forEach((ghost) => ghost.toggleAim()))
+      onKey('x')(() => {
+        player.toggleCollider()
+        map.toggleCollider()
+        ghosts.forEach((ghost) => ghost.toggleCollider())
+      })
+      onKey('k')(console.clear)
+      onKey('/')(() => {
+        state = 'eaten'
+        player.state = 'eaten'
+      })
+    }
 
     if (ready.timer > 0) {
       ready.timer -= elapsed
@@ -452,7 +454,6 @@ export default () => {
               state = 'eaten'
               player.state = 'eaten'
             }
-            // paused = true
           }
         }
       }
