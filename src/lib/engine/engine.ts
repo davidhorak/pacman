@@ -4,6 +4,20 @@ import { render } from './render'
 import { sprites } from './render/sprites'
 import { tiles } from './render/tiles'
 
+const isHTMLCanvasElement = (element: HTMLElement | null): element is HTMLCanvasElement =>
+  element?.tagName.toLowerCase() === 'canvas'
+
+const getCanvas = (): HTMLCanvasElement => {
+  const existing = document.getElementById('canvas-game')
+  if (isHTMLCanvasElement(existing)) {
+    return existing
+  }
+  
+  const canvas = document.createElement('canvas')
+  canvas.setAttribute('id', 'canvas-game')
+  return canvas
+}
+
 export const engine = ({ width, height, fps }: { width: number; height: number; fps?: number }) => {
   let lastUpdate = 0
   let lastRender = 0
@@ -11,7 +25,7 @@ export const engine = ({ width, height, fps }: { width: number; height: number; 
   const onRender = observable<void>()
   fps = fps ? 1000 / fps : undefined
 
-  const canvas = document.createElement('canvas')
+  const canvas = getCanvas()
   const context = canvas.getContext('2d')
   if (context === null) {
     throw new Error('failed to get the canvas context.')

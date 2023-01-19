@@ -1,4 +1,5 @@
 # Pac-Mac
+
 Implementation of the 1980's Pac-Man, just for sake of exploration and education. The implementation is based on the publicly accessible materials, descriptions of the game mechanics and behaviors.
 
 > Revision: Jan 17, 2023.

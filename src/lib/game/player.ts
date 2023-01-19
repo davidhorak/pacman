@@ -6,7 +6,7 @@ import type { Tiles } from '../engine/render/tiles'
 import type { Direction } from './direction'
 import { directionVelocity } from './directionVelocity'
 import type { Map } from './map'
-import { noop, round2, toLevelProperties, toLevelProperty } from './utils'
+import { noop, round2DecimalPlaces, toLevelProperties, toLevelProperty } from './utils'
 
 type State = 'idle' | 'chomp' | 'eaten'
 
@@ -243,7 +243,7 @@ export const player =
           render.drawText(
             '10px monospace',
             '#ffffff',
-            `→ ${round2(speed * speedMultiplier)}`,
+            `→ ${round2DecimalPlaces(speed * speedMultiplier)}`,
             tileSize * 14,
             tileSize * 7 + 2,
             true

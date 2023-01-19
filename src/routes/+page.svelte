@@ -1,7 +1,8 @@
 <script ts>
+  import { dev } from '$app/environment';
   import { onMount } from 'svelte'
   import game from '$lib'
-  onMount(game)
+  onMount(() => game(dev))
 </script>
 
 <style>

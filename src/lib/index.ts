@@ -368,9 +368,7 @@ export default (development = false) => {
       onKey('f')(() => {
         bonusScore.multiplier = 1
         ghosts.forEach(
-          (ghost) =>
-            ['scatter', 'chase'].includes(ghost.state) &&
-            (ghost.state = 'frightened')
+          (ghost) => ['scatter', 'chase'].includes(ghost.state) && (ghost.state = 'frightened')
         )
       })
       onKey('e')(() => ghosts.forEach((ghost) => (ghost.state = 'eaten')))

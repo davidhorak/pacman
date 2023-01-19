@@ -8,7 +8,7 @@ import type { Direction } from './direction'
 import { directionVelocity } from './directionVelocity'
 import type { Map } from './map'
 import type { Player } from './player'
-import { round2, toLevelProperties } from './utils'
+import { round2DecimalPlaces, toLevelProperties } from './utils'
 
 type State = 'idle' | 'scatter' | 'chase' | 'frightened' | 'eaten' | 'departure' | 'gated'
 
@@ -744,7 +744,7 @@ export const ghost =
           render.drawText(
             '10px monospace',
             '#ffffff',
-            `→ ${round2(momentum)} ${cruiseElroyMode > 0 ? `(CR${cruiseElroyMode})` : ''}`,
+            `→ ${round2DecimalPlaces(momentum)} ${cruiseElroyMode > 0 ? `(CR${cruiseElroyMode})` : ''}`,
             x * tileSize + 4,
             y * tileSize + 13
           )
